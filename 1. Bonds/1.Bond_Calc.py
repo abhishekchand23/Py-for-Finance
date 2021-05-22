@@ -21,7 +21,8 @@ v_cf = np.array([2.5,2.5,2.5,102.5])
 
 r_zero = np.array([0.05, 0.0525, 0.0535, 0.055])
 
-print(f"\nDiscount Factors: {bond_price_zero_rate(n, t_cf, v_cf, r_zero)[0]} \nBond Price: {bond_price_zero_rate(n, t_cf, v_cf, r_zero)[1]}\n")
+print(f"\nDiscount Factors: \
+    {bond_price_zero_rate(n, t_cf, v_cf, r_zero)[0]} \nBond Price: {bond_price_zero_rate(n, t_cf, v_cf, r_zero)[1]}\n")
 
 f = lambda C : sum(C * np.exp(-1 * r_zero[:-1] * t_cf[:-1])/2) + ( 1 + C/2) * np.exp(-1 * r_zero[-1] * t_cf[-1])
 
@@ -43,7 +44,7 @@ while abs(tol) >= 0.000001:
         print('Values equal')
         print(tol)
         break
-print(f"\nPar yield: {mid:.2%}\n")
+print(f"Par yield: {mid:.2%}\n")
 
 
 def integrate_midpoint_rule(a, b, n, f_int):
@@ -57,7 +58,8 @@ def integrate_midpoint_rule(a, b, n, f_int):
         f_int (function): routine evauation f(x)
     """
     h = (b - a) / n
-    i_midpoints = np.array(1+(np.linspace(a,b,n)-1/2)*h)
+    i_midpoints = np.array(a+(np.linspace(1,n,n)-1/2)*h)
     return h*sum([f_int(x) for x in i_midpoints])
 
-print(integrate_midpoint_rule(a=0 , b=2, n=100, f_int = lambda x: np.exp(-1*(x**2))))
+print(f"Numerical Integration value using Mid-Point rule:\
+    {integrate_midpoint_rule(a=0 , b=2, n=4, f_int = lambda x: np.exp(-1*(x**2))):.8}\n")
