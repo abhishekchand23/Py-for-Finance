@@ -46,4 +46,18 @@ while abs(tol) >= 0.000001:
 print(f"\nPar yield: {mid:.2%}\n")
 
 
-    
+def integrate_midpoint_rule(a, b, n, f_int):
+    """
+    Code for implementing numerical integration using mid point rule
+
+    Args:
+        a (int): left endpoint of the integration interval
+        b (int): right endpoint of the integration interval
+        n (int ): number of partitions
+        f_int (function): routine evauation f(x)
+    """
+    h = (b - a) / n
+    i_midpoints = np.array(1+(np.linspace(a,b,n)-1/2)*h)
+    return h*sum([f_int(x) for x in i_midpoints])
+
+print(integrate_midpoint_rule(a=0 , b=2, n=100, f_int = lambda x: np.exp(-1*(x**2))))
